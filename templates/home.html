@@ -1,34 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+    <link rel="stylesheet" href="/static/css/css.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista della Spesa</title>
-    <style>
-        /* Puoi aggiungere qui i tuoi stili CSS per personalizzare l'aspetto della lista */
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 5px;
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
 </head>
 <body>
-    <h1>Lista della Spesa</h1>
-    <ul id="lista">
-        <li>Pasta <button>Elimina</button></li>
-        <li>Pesce <button>Elimina</button></li>
-    </ul>
-    <input type="text" id="nuovoElemento" placeholder="Aggiungi un elemento">
-    <button id="aggiungi">Aggiungi</button>
-    <button id="svuota">Svuota Lista</button>
+    <h1>La tua Lista della Spesa</h1>
 
-    <script>
-        // Qui andrà inserito il codice JavaScript per rendere la lista interattiva
-    </script>
+    {% if lista %}
+        <ul>
+            {% for elemento in lista %}
+                <li>
+                    {{ elemento }}
+                    <form action="/rimuovi/{{ loop.index0 }}" method="post" style="display:inline;">
+                        <button type="submit">Rimuovi</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>La lista è vuota.</p>
+    {% endif %}
+
+    <form action="/aggiungi" method="post">
+        <input type="text" name="elemento" placeholder="Aggiungi un elemento" required>
+        <button type="submit" class="add-button">Aggiungi</button>
+    </form>
 </body>
 </html>
