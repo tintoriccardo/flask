@@ -1,7 +1,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for
 
-from models import db,ListaSpesa
+from models import db, ListaSpesa
 
 app = Flask(__name__)
 
@@ -23,7 +23,9 @@ def home():
 def aggiungi():
     elemento = request.form['elemento']
     if elemento:
-        lista_spesa.append(elemento)
+        nuovo_elemento = ListaSpesa(elemento=elemento)
+        db.session.add(nuovo_elemento) 
+        db.session.commit()
     return redirect(url_for('home'))
 
 @app.route('/rimuovi/<int:indice>', methods=['POST'])
