@@ -30,6 +30,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #c0392b;
 }
@@ -49,6 +50,14 @@ input {
 .add-button {
     padding: 10px 20px;
     background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.del-button {
+    padding: 10px 20px;
+    background-color: #cc2e2e;
     color: white;
     border: none;
     border-radius: 4px;
