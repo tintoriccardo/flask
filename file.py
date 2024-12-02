@@ -30,9 +30,19 @@ def aggiungi():
 
 @app.route('/rimuovi/<int:indice>', methods=['POST'])
 def rimuovi(indice):
-    if 0 <= indice < len(lista_spesa):
-        lista_spesa.pop(indice)
-    return redirect(url_for('home'))
+    elementodaRimuovere = ListaSpesa.query.get_or_404(indice) 
+    db.session.delete(elementodaRimuovere) 
+    db.session.commit()
+    return (redirect(url_for('home')))
+
+
+@app.route('/svuota', methods=['POST'])
+def svuota():
+     ListaSpesa.query.delete()
+     db.session.commit()
+     return (redirect(url_for('home')))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+

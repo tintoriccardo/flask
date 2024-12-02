@@ -13,8 +13,8 @@
         <ul>
             {% for elemento in lista %}
                 <li>
-                    {{ elemento }}
-                    <form action="/rimuovi/{{ loop.index0 }}" method="post" style="display:inline;">
+                    {{ elemento.elemento }}
+                    <form action="/rimuovi/{{ elemento.id }}" method="post" style="display:inline;">
                         <button type="submit">Rimuovi</button>
                     </form>
                 </li>
@@ -23,7 +23,9 @@
     {% else %}
         <p>La lista è vuota.</p>
     {% endif %}
-
+    <form action="/svuota" method="post">
+        <button type="submit" class="add-button">svuota</button>
+    </form>
     <form action="/aggiungi" method="post">
         <input type="text" name="elemento" placeholder="Aggiungi un elemento" required>
         <button type="submit" class="add-button">Aggiungi</button>
